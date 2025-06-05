@@ -12,28 +12,29 @@ spec:
       labels:
         app: ftp-server
     spec:
-      hostNetwork: true 
       containers:
         - name: ftp
           image: ftp-server:latest
           imagePullPolicy: Never
+          livenessProbe:   { tcpSocket: { port: 2121 }, initialDelaySeconds: 5 }
+          readinessProbe:  { tcpSocket: { port: 2121 }, initialDelaySeconds: 3 }
           env:
             - name: PUBLICHOST
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
           ports:
-            - {containerPort: 2121, name: control}
-            - {containerPort: 30000, name: pasv-30000}
-            - {containerPort: 30001, name: pasv-30001}
-            - {containerPort: 30002, name: pasv-30002}
-            - {containerPort: 30003, name: pasv-30003}
-            - {containerPort: 30004, name: pasv-30004}
-            - {containerPort: 30005, name: pasv-30005}
-            - {containerPort: 30006, name: pasv-30006}
-            - {containerPort: 30007, name: pasv-30007}
-            - {containerPort: 30008, name: pasv-30008}
-            - {containerPort: 30009, name: pasv-30009}
+            - {containerPort: 2121, hostPort: 2121, name: control}
+            - {containerPort: 30000,  hostPort: 30000, name: pasv-30000}
+            - {containerPort: 30001,  hostPort: 30001, name: pasv-30001}
+            - {containerPort: 30002,  hostPort: 30002, name: pasv-30002}
+            - {containerPort: 30003,  hostPort: 30003, name: pasv-30003}
+            - {containerPort: 30004,  hostPort: 30004, name: pasv-30004}
+            - {containerPort: 30005,  hostPort: 30005, name: pasv-30005}
+            - {containerPort: 30006,  hostPort: 30006, name: pasv-30006}
+            - {containerPort: 30007,  hostPort: 30007, name: pasv-30007}
+            - {containerPort: 30008,  hostPort: 30008, name: pasv-30008}
+            - {containerPort: 30009,  hostPort: 30009, name: pasv-30009}
           volumeMounts:
             - name: ftp-data
               mountPath: /srv/ftp
