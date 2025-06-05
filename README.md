@@ -30,8 +30,6 @@ Again, thank you for the opportunity — I look forward to hearing from you soon
 
 ## Setup
 
-## Setup
-
 For this setup, I used a MacBook Pro running Docker Desktop. I configured a single-node Kubernetes cluster to handle the deployment.
 
 Due to limitations with Docker Desktop, I initially tested the configuration using `NodePort`. During early testing, I connected to the FTP server via port `32121`. Once I had verified functionality, I updated the configuration to force connections through port `2121`.
@@ -68,7 +66,7 @@ However, this setting may cause issues on a standard multi-node Kubernetes clust
 
 Another note: this override setting causes the container to fail startup when run directly with Docker on my Mac. Initially, I set it to my laptop’s local IP for standalone testing, but that didn’t work with Kubernetes. Switching to a loopback address resolved the issue in the cluster, so I left it that way.
 
-If the static port mappings (2121 and 30000–30009) cause conflicts, they can be safely adjusted in both the service and deployment files. Let me know if you'd like me to update those for your environment.
+If the static port mappings (2121 and 30000–30009) cause conflicts, they can be safely adjusted in the dockerfile, service, and deployment files. Let me know if you'd like me to update those for your environment.
 
 Worst case, I’d be happy to jump on a quick screen share to walk through the setup and help troubleshoot any issues you run into.
 
