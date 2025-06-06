@@ -19,7 +19,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y libpam0g bash net-tools netcat && \
+    apt-get install -y libpam0g bash && \
     useradd -m -d /srv/ftp admin && echo "admin:admin" | chpasswd && \
     mkdir -p /srv/ftp && chown admin:admin /srv/ftp && \
     mkdir -p /etc/bftpd && \
